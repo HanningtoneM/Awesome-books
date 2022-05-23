@@ -11,7 +11,7 @@ Awesome books using HTML, CSS, and JavaScripts
 
 ## Live Demo
 
-[Live Demo Link](https://hanningtonem.github.io/Women-summit/)
+[Live Demo Link](https://hanningtonem.github.io/Awesome-books/)
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ To get a local copy up and running:
 
 1. Clone this repository or download the Zip folder:
 
-**``git clone https://github.com/HanningtoneM/Women-summit.git``**
+**``git clone https://github.com/HanningtoneM/Awesome-books.git``**
 
 2. Navigate to the location of the folder in your machine:
 
