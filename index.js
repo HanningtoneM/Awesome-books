@@ -31,3 +31,31 @@ function removeBook(book) {
   books = result;
   populateFields();
 }
+
+const displayBooks = () => {
+  listBooks.innerHTML = '';
+  books.map((book) => {
+    const bookDiv = document.createElement('div');
+    const titleBook = document.createElement('p');
+    const authorBook = document.createElement('p');
+    const deleteBtn = document.createElement('button');
+    const hrElementet = document.createElement('hr');
+    deleteBtn.textContent = 'Remove';
+
+    titleBook.textContent = book.title;
+    authorBook.textContent = book.author;
+
+    bookDiv.appendChild(titleBook);
+    bookDiv.appendChild(authorBook);
+    bookDiv.appendChild(deleteBtn);
+    bookDiv.appendChild(hrElementet);
+
+    listBooks.appendChild(bookDiv);
+
+    deleteBtn.addEventListener('click', () => {
+      removeBook(book);
+      listBooks.removeChild(bookDiv);
+    });
+    return listBooks;
+  });
+};
