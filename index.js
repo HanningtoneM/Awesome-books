@@ -59,3 +59,18 @@ const displayBooks = () => {
     return listBooks;
   });
 };
+
+const addBook = (newBook) => {
+  books.push(newBook);
+  populateFields();
+  displayBooks();
+};
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addBook(new Book(inputBook.title, inputBook.author));
+  form.submit();
+});
+
+displayBooks();
+populateFields();
