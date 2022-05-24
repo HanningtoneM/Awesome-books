@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 button {
   background-color: #fff;
   color: #ec5242;
   padding: 15px 50px;
-  font-size: 20px;
-  margin-top: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: 1px solid black;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: auto;
 }
 
 button:hover {
@@ -15,28 +21,74 @@ button:hover {
 }
 
 .form-input {
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
+  max-width: 16rem;
+  box-sizing: border-box;
 }
 
 form input {
   display: block;
-  width: 80%;
-  margin-top: 18px;
+  width: 100%;
   border: 1px;
   border-radius: 8px;
   padding: 15px 16px;
   border-color: black;
   border-style: groove;
+  margin: auto;
 }
 
-h1 {
-  color: #ec5242;
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+.list-books {
+  border: 0.125rem solid #333;
+  border-radius: 0.25rem;
+  max-width: 32rem;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+}
+
+.book-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.titleListBooks {
+  text-align: center;
+  color: #f1356d;
+}
+
+.titleFormAdd {
+  text-align: center;
+  color: #f1356d;
+}
+
+.titleFormAdd::before {
+  content: '';
+  height: 3px;
+  width: 6rem;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  bottom: 2rem;
+  z-index: -1;
+  border-radius: 3px;
+  background: #f1356d;
 }
 
 body {
   padding: 1em;
   margin: 0;
+  font-family: 'Quicksand', 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+  color: #333;
 }
 
 ul {
@@ -47,6 +99,8 @@ ul {
 li {
   margin: 0;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 p {
