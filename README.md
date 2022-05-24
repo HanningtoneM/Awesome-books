@@ -7,7 +7,6 @@ Awesome books using HTML, CSS, and JavaScripts
 - HTML
 - CSS
 - JAVASCRIPT
-- BOOTSTRAP
 
 ## Live Demo
 
