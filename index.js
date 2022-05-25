@@ -1,6 +1,10 @@
 const listBooks = document.querySelector('.list-books');
 const form = document.querySelector('.form-input');
 const [title, author] = form.elements;
+const [navList, navAdd, navContact] = document.querySelectorAll('.list-item');
+const allBooks = document.querySelector('.allBooks');
+const addBook = document.querySelector('.addBook');
+const contact = document.querySelector('.contact');
 
 const inputBook = {};
 let books = [];
@@ -8,6 +12,24 @@ let books = [];
 if (localStorage.savedBooks) {
   books = JSON.parse(localStorage.getItem('savedBooks'));
 }
+
+navList.addEventListener('click', () => {
+  allBooks.classList.remove('hidden');
+  addBook.classList.add('hidden');
+  contact.classList.add('hidden');
+});
+
+navAdd.addEventListener('click', () => {
+  addBook.classList.remove('hidden');
+  allBooks.classList.add('hidden');
+  contact.classList.add('hidden');
+});
+
+navContact.addEventListener('click', () => {
+  contact.classList.remove('hidden');
+  allBooks.classList.add('hidden');
+  addBook.classList.add('hidden');
+});
 
 title.addEventListener('change', () => {
   inputBook.title = title.value;
