@@ -1,6 +1,10 @@
 const listBooks = document.querySelector('.list-books');
 const form = document.querySelector('.form-input');
 const [title, author] = form.elements;
+const [navList, navAdd, navContact] = document.querySelectorAll('.list-item');
+const allBooks = document.querySelector('.allBooks');
+const addBook = document.querySelector('.addBook');
+const contact = document.querySelector('.contact');
 
 const inputBook = {};
 let books = [];
@@ -8,6 +12,24 @@ let books = [];
 if (localStorage.savedBooks) {
   books = JSON.parse(localStorage.getItem('savedBooks'));
 }
+
+navList.addEventListener('click', () => {
+  allBooks.classList.remove('hidden');
+  addBook.classList.add('hidden');
+  contact.classList.add('hidden');
+});
+
+navAdd.addEventListener('click', () => {
+  addBook.classList.remove('hidden');
+  allBooks.classList.add('hidden');
+  contact.classList.add('hidden');
+});
+
+navContact.addEventListener('click', () => {
+  contact.classList.remove('hidden');
+  allBooks.classList.add('hidden');
+  addBook.classList.add('hidden');
+});
 
 title.addEventListener('change', () => {
   inputBook.title = title.value;
@@ -17,60 +39,58 @@ author.addEventListener('change', () => {
   inputBook.author = author.value;
 });
 
-function Book(title, author) {
-  this.title = title;
-  this.author = author;
-}
-
 const populateFields = () => {
   localStorage.setItem('savedBooks', JSON.stringify(books));
 };
 
-function removeBook(book) {
-  const result = books.filter((b) => b !== book);
-  books = result;
-  populateFields();
-}
+const Book = class {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 
-const displayBooks = () => {
-  listBooks.innerHTML = '';
-  books.map((book) => {
-    const bookDiv = document.createElement('div');
-    const titleBook = document.createElement('p');
-    const authorBook = document.createElement('p');
-    const deleteBtn = document.createElement('button');
-    const hrElementet = document.createElement('hr');
-    deleteBtn.textContent = 'Remove';
+  static removeBook(book) {
+    const result = books.filter((b) => b !== book);
+    books = result;
+    populateFields();
+  }
 
-    titleBook.textContent = book.title;
-    authorBook.textContent = book.author;
+  static addBook = (newBook) => {
+    books.push(newBook);
+    populateFields();
+    this.displayBooks();
+  };
 
-    bookDiv.appendChild(titleBook);
-    bookDiv.appendChild(authorBook);
-    bookDiv.appendChild(deleteBtn);
-    bookDiv.appendChild(hrElementet);
+  static displayBooks = () => {
+    listBooks.innerHTML = '';
+    books.map((book) => {
+      const bookDiv = document.createElement('tr');
+      const elementBook = document.createElement('td');
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Remove';
 
-    listBooks.appendChild(bookDiv);
+      elementBook.textContent = `"${book.title}" by ${book.author}`;
 
-    deleteBtn.addEventListener('click', () => {
-      removeBook(book);
-      listBooks.removeChild(bookDiv);
+      bookDiv.classList.add('book-container');
+      bookDiv.appendChild(elementBook);
+      bookDiv.appendChild(deleteBtn);
+
+      listBooks.appendChild(bookDiv);
+
+      deleteBtn.addEventListener('click', () => {
+        this.removeBook(book);
+        listBooks.removeChild(bookDiv);
+      });
+      return listBooks;
     });
-    return listBooks;
-  });
-};
-
-const addBook = (newBook) => {
-  books.push(newBook);
-  populateFields();
-  displayBooks();
+  };
 };
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  addBook(new Book(inputBook.title, inputBook.author));
+  Book.addBook(new Book(inputBook.title, inputBook.author));
   form.submit();
 });
 
-displayBooks();
+Book.displayBooks();
 populateFields();
